@@ -36,7 +36,7 @@ namespace YellowstonePathology.OptimusPrime
 
                     sql += @"Update tblPanelSetOrder set ResultCode = '" + hpvResult.ResultCode + "', "
                     + "[Accepted] = 1, "
-                    + "[AcceptedBy] = 'Optimus Prime', "
+                    + "[AcceptedBy] = 'AUTOVER TESTING', "
                     + "[AcceptedById] = 5134, "
                     + "[AcceptedDate] = '" + DateTime.Today.ToString("MM/dd/yyyy") + "', "
                     + "[AcceptedTime] = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', "
@@ -58,7 +58,7 @@ namespace YellowstonePathology.OptimusPrime
                     sql += @"Update tblPanelSetOrder set ResultCode = '" + hpvResult.ResultCode + "', "
                     + "[HoldDistribution] = 1, "
                     + "[Accepted] = 1, "
-                    + "[AcceptedBy] = 'Optimus Prime', "
+                    + "[AcceptedBy] = 'AUTOVER TESTING', "
                     + "[AcceptedById] = 5134, "
                     + "[AcceptedDate] = '" + DateTime.Today.ToString("MM/dd/yyyy") + "', "
                     + "[AcceptedTime] = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "' "
