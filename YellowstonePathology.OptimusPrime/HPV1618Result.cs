@@ -66,25 +66,24 @@ namespace YellowstonePathology.OptimusPrime
 
         public virtual string GetSqlStatement(string aliquotOrderId)
         {
-            string sql = @"Update tblPanelSetOrderHPV1618 set HPV16Result = '" + this.m_HPV16Result + "',  "
-                        + "HPV16ResultCode = '" + this.m_HPV16ResultCode + "', "
-                        + "HPV18Result = '" + this.m_HPV18Result + "', "
-                        + "HPV18ResultCode = '" + this.m_HPV18ResultCode + "' "
-                        + "from tblPanelSetOrderHPV1618 hpv, tblPanelSetOrder pso "
-                        + "where hpv.ReportNo = pso.ReportNo "
-                        + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
+            string sql = @"Update tblPanelSetOrderHPV1618 hpv INER JOIN tblPanelSetOrder pso ON hpv.ReportNo = pso.ReportNo "
+                        + "set hpv.HPV16Result = '" + this.m_HPV16Result + "',  "
+                        + "hpv.HPV16ResultCode = '" + this.m_HPV16ResultCode + "', "
+                        + "hpv.HPV18Result = '" + this.m_HPV18Result + "', "
+                        + "hpv.HPV18ResultCode = '" + this.m_HPV18ResultCode + "' "
+                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
 
             sql += @"Update tblPanelSetOrder set "
-            + "[Accepted] = 1, "
-            + "[AcceptedBy] = 'AUTOVER TESTING', "
-            + "[AcceptedById] = 5134, "
-            + "[AcceptedDate] = '" + DateTime.Today.ToString("MM/dd/yyyy") + "', "
-            + "[AcceptedTime] = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', "
-            + "[Final] = 1, "
-            + "[Signature] = 'AUTOVER TESTING', "
-            + "[FinaledById] = 5134, "
-            + "[FinalDate] = '" + DateTime.Today.ToString("MM/dd/yyyy") + "', "
-            + "[FinalTime] = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "' "
+            + "Accepted = 1, "
+            + "AcceptedBy = 'AUTOVER TESTING', "
+            + "AcceptedById = 5134, "
+            + "AcceptedDate = '" + DateTime.Today.ToString("yyyy-MM-dd") + "', "
+            + "AcceptedTime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "', "
+            + "Final = 1, "
+            + "Signature = 'AUTOVER TESTING', "
+            + "FinaledById = 5134, "
+            + "FinalDate = '" + DateTime.Today.ToString("yyyy-MM-dd") + "', "
+            + "FinalTime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "' "
             + "where PanelSetId = 62 and Accepted = 0 and OrderedOnId = '" + aliquotOrderId + "';";
 
             return sql;

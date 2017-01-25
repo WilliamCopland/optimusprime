@@ -17,25 +17,24 @@ namespace YellowstonePathology.OptimusPrime
 
         public override string GetSqlStatement(string aliquotOrderId)
         {
-            string sql = @"Update tblNGCTTestOrder set NeisseriaGonorrhoeaeResult = '" + this.m_NGResult + "',  "
+            string sql = @"Update tblNGCTTestOrder ngct Inner join tblPanelSetOrder pso on ngct.ReportNo = pso.ReportNo "
+                        + "set NeisseriaGonorrhoeaeResult = '" + this.m_NGResult + "',  "
                         + "NGResultCode = '" + this.m_NGResultCode + "', "
                         + "ChlamydiaTrachomatisResult = '" + this.m_CTResult + "', "
                         + "CTResultCode = '" + this.m_CTResultCode + "' "
-                        + "from tblNGCTTestOrder ngct, tblPanelSetOrder pso "
-                        + "where ngct.ReportNo = pso.ReportNo "
-                        + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
+                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
 
             sql += @"Update tblPanelSetOrder set "
-            + "[Accepted] = 1, "
-            + "[AcceptedBy] = 'AUTOVER TESTING', "
-            + "[AcceptedById] = 5134, "
-            + "[AcceptedDate] = '" + DateTime.Today.ToString("yyyy-MM-dd") + "', "
-            + "[AcceptedTime] = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "', "
-            + "[Final] = 1, "
-            + "[Signature] = 'AUTOVER TESTING', "
-            + "[FinaledById] = 5134, "
-            + "[FinalDate] = '" + DateTime.Today.ToString("MM/dd/yyyy") + "', "
-            + "[FinalTime] = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "' "
+            + "Accepted = 1, "
+            + "AcceptedBy = 'AUTOVER TESTING', "
+            + "AcceptedById = 5134, "
+            + "AcceptedDate = '" + DateTime.Today.ToString("yyyy-MM-dd") + "', "
+            + "AcceptedTime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "', "
+            + "Final = 1, "
+            + "Signature = 'AUTOVER TESTING', "
+            + "FinaledById = 5134, "
+            + "FinalDate = '" + DateTime.Today.ToString("MM/dd/yyyy") + "', "
+            + "FinalTime = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "' "
             + "where PanelSetId = 3 and Accepted = 0 and OrderedOnId = '" + aliquotOrderId + "';";
 
             return sql;
