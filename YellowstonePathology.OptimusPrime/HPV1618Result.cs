@@ -66,7 +66,7 @@ namespace YellowstonePathology.OptimusPrime
 
         public virtual string GetSqlStatement(string aliquotOrderId)
         {
-            string sql = @"Update tblPanelSetOrderHPV1618 hpv INER JOIN tblPanelSetOrder pso ON hpv.ReportNo = pso.ReportNo "
+            string sql = @"Update tblPanelSetOrderHPV1618 hpv INNER JOIN tblPanelSetOrder pso ON hpv.ReportNo = pso.ReportNo "
                         + "set hpv.HPV16Result = '" + this.m_HPV16Result + "',  "
                         + "hpv.HPV16ResultCode = '" + this.m_HPV16ResultCode + "', "
                         + "hpv.HPV18Result = '" + this.m_HPV18Result + "', "
