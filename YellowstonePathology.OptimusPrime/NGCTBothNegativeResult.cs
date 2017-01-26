@@ -18,10 +18,10 @@ namespace YellowstonePathology.OptimusPrime
         public override string GetSqlStatement(string aliquotOrderId)
         {
             string sql = @"Update tblNGCTTestOrder ngct Inner join tblPanelSetOrder pso on ngct.ReportNo = pso.ReportNo "
-                        + "set NeisseriaGonorrhoeaeResult = '" + this.m_NGResult + "',  "
-                        + "NGResultCode = '" + this.m_NGResultCode + "', "
-                        + "ChlamydiaTrachomatisResult = '" + this.m_CTResult + "', "
-                        + "CTResultCode = '" + this.m_CTResultCode + "' "
+                        + "set ngct.NeisseriaGonorrhoeaeResult = '" + this.m_NGResult + "',  "
+                        + "ngct.NGResultCode = '" + this.m_NGResultCode + "', "
+                        + "ngct.ChlamydiaTrachomatisResult = '" + this.m_CTResult + "', "
+                        + "ngct.CTResultCode = '" + this.m_CTResultCode + "' "
                         + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
 
             sql += @"Update tblPanelSetOrder set "
@@ -33,8 +33,8 @@ namespace YellowstonePathology.OptimusPrime
             + "Final = 1, "
             + "Signature = 'AUTOVER TESTING', "
             + "FinaledById = 5134, "
-            + "FinalDate = '" + DateTime.Today.ToString("MM/dd/yyyy") + "', "
-            + "FinalTime = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "' "
+            + "FinalDate = '" + DateTime.Today.ToString("yyyy-MM-dd") + "', "
+            + "FinalTime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "' "
             + "where PanelSetId = 3 and Accepted = 0 and OrderedOnId = '" + aliquotOrderId + "';";
 
             return sql;
