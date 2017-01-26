@@ -63,10 +63,9 @@ namespace YellowstonePathology.OptimusPrime
                 else if (overallInterpretation == "Invalid")
                 {
                     hpvResult = new HPVInvalidResult();
-                    sql = @"Update tblHPVTestOrder set Result = '" + hpvResult.Result + "' "
-                        + "from tblHPVTestOrder psoh, tblPanelSetOrder pso "
-                        + "where psoh.ReportNo = pso.ReportNo "
-                        + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";                    
+                    sql = @"Update tblHPVTestOrder psoh INNER JOIN tblPanelSetOrder pso ON psoh.ReportNo = pso.ReportNo "
+                        + "set psoh.Result = '" + hpvResult.Result + "' "
+                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";                    
 
                     sql += @"Update tblPanelSetOrder set ResultCode = '" + hpvResult.ResultCode + "' "                    
                     + "where PanelSetId = 14 and Accepted = 0 and OrderedOnId = '" + aliquotOrderId + "';";                    
