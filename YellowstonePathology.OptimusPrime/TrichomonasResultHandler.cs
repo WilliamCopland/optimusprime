@@ -74,14 +74,7 @@ namespace YellowstonePathology.OptimusPrime
                 }
             }
 
-            using (var cnx = new MySqlConnection(connectionString))
-            {
-                using (var cmd = new MySqlCommand(sql, cnx))
-                {
-                    await cnx.OpenAsync();
-                    await cmd.ExecuteNonQueryAsync();
-                }
-            }
+            await MySqlHelper.ExecuteNonQueryAsync(connectionString, sql, null);
 
             return "Optimus Prime updated result: " + aliquotOrderId + " - " + testName + " on: " + DateTime.Now.ToString();
         }

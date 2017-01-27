@@ -25,14 +25,6 @@ namespace YellowstonePathology.OptimusPrime
             HPV1618Result hpv1618Result = HPV1618Result.GetResult(hpv16Result, hpv18Result);
             string sql = hpv1618Result.GetSqlStatement(aliquotOrderId);
             await MySqlHelper.ExecuteNonQueryAsync(connectionString, sql, null);
-            /*using (var cnx = new MySqlConnection(connectionString))
-            {
-                using (var cmd = new MySqlCommand(connectionString, sql, null))
-                {
-                    await cnx.OpenAsync();
-                    await cmd.ExecuteNonQueryAsync();
-                }
-            }*/
             
             return "Optimus Prime updated result: " + aliquotOrderId + " - " + testName + " on " + DateTime.Now.ToString();
         }
