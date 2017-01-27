@@ -27,7 +27,7 @@ namespace YellowstonePathology.OptimusPrime
                 HPVResult hpvResult = null;
                 if (result == "TRICH neg")
                 {
-                    hpvResult = new HPVNegativeResult();
+                    hpvResult = new TrichomonasNegativeResult();
                     sql = @"Update tblTrichomonasTestOrder psoh INNER JOIN tblPanelSetOrder pso ON psoh.ReportNo = pso.ReportNo "
                         + "set psoh.Result = '" + hpvResult.Result + "' "
                         + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";                        
@@ -47,7 +47,7 @@ namespace YellowstonePathology.OptimusPrime
                 }
                 else if (result == "TRICH POS")
                 {
-                    hpvResult = new HPVPositiveResult();
+                    hpvResult = new TrichomonasPositiveResult();
                     sql = @"Update tblTrichomonasTestOrder psoh INNER JOIN tblPanelSetOrder pso ON psoh.ReportNo = pso.ReportNo "
                         + "set psoh.Result = '" + hpvResult.Result + "' "
                         + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";                        
@@ -63,8 +63,8 @@ namespace YellowstonePathology.OptimusPrime
                 }
                 else if (result == "Invalid")
                 {
-                    hpvResult = new HPVInvalidResult();
-                    sql = @"Update tblHPVTestOrder psoh INNER JOIN tblPanelSetOrder pso ON psoh.ReportNo = pso.ReportNo "
+                    hpvResult = new TrichomonasInvalidResult();
+                    sql = @"Update tblTrichomonasTestOrder psoh INNER JOIN tblPanelSetOrder pso ON psoh.ReportNo = pso.ReportNo "
                         + "set psoh.Result = '" + hpvResult.Result + "' "
                         + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";                    
 
