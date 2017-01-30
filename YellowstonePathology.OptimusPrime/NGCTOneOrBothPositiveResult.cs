@@ -34,12 +34,19 @@ namespace YellowstonePathology.OptimusPrime
 
         public override string GetSqlStatement(string aliquotOrderId)
         {
-            string sql = @"Update tblNGCTTestOrder ngct INNER JOIN tblPanelSetOrder pso ON ngct.ReportNo = pso.ReportNo "
+            string sql = @"Update tblNGCTTestOrder set NeisseriaGonorrhoeaeResult = '" + this.m_NGResult + "',  "
+                        + "NGResultCode = '" + this.m_NGResultCode + "', "
+                        + "ChlamydiaTrachomatisResult = '" + this.m_CTResult + "', "
+                        + "CTResultCode = '" + this.m_CTResultCode + "' "
+                        + "from tblNGCTTestOrder ngct, tblPanelSetOrder pso "
+                        + "where ngct.ReportNo = pso.ReportNo "
+                        + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
+            /*string sql = @"Update tblNGCTTestOrder ngct INNER JOIN tblPanelSetOrder pso ON ngct.ReportNo = pso.ReportNo "
                         + "set ngct.NeisseriaGonorrhoeaeResult = '" + this.m_NGResult + "',  "
                         + "ngct.NGResultCode = '" + this.m_NGResultCode + "', "
                         + "ngct.ChlamydiaTrachomatisResult = '" + this.m_CTResult + "', "
                         + "ngct.CTResultCode = '" + this.m_CTResultCode + "' "
-                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
+                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";*/
 
             sql += @"Update tblPanelSetOrder set "
             + "Accepted = 1, "
