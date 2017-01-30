@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
 
 namespace YellowstonePathology.OptimusPrime
@@ -16,7 +15,7 @@ namespace YellowstonePathology.OptimusPrime
 
         public async Task<string> HandleResult(IDictionary<string, object> payload)
         {
-            var connectionString = "Data Source=TestSQL;Initial Catalog=YPIData;Integrated Security=True";
+            var connectionString = "Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis;";
             
             string testName = (string)payload["testName"];
             string aliquotOrderId = (string)payload["aliquotOrderId"];
@@ -26,15 +25,8 @@ namespace YellowstonePathology.OptimusPrime
             NGCTResult ngctResult = NGCTResult.GetResult(ngResult, ctResult);
             string sql = ngctResult.GetSqlStatement(aliquotOrderId);
 
-            using (var cnx = new SqlConnection(connectionString))
-            {
-                using (var cmd = new SqlCommand(sql, cnx))
-                {
-                    await cnx.OpenAsync();
-                    await cmd.ExecuteNonQueryAsync();
-                }
-            }
-            
+            await MySqlHelper.ExecuteNonQueryAsync(connectionString, sql, null);
+
             return "Optimus Prime updated result: " + aliquotOrderId + " - " + testName + " on " + DateTime.Now.ToString();
         }
     }
