@@ -17,13 +17,12 @@ namespace YellowstonePathology.OptimusPrime
 
         public override string GetSqlStatement(string aliquotOrderId)
         {
-            string sql = @"Update tblPanelSetOrderHPV1618 set HPV16Result = '" + this.m_HPV16Result + "',  "
-                        + "HPV16ResultCode = '" + this.m_HPV16ResultCode + "', "
-                        + "HPV18Result = '" + this.m_HPV18Result + "', "
-                        + "HPV18ResultCode = '" + this.m_HPV18ResultCode + "' "
-                        + "from tblPanelSetOrderHPV1618 hpv, tblPanelSetOrder pso "
-                        + "where hpv.ReportNo = pso.ReportNo "
-                        + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
+            string sql = @"Update tblPanelSetOrderHPV1618 hpv Inner Join tblPanelSetOrder pso on hpv.ReportNo = pso.ReportNo "
+                        + "set hpv.HPV16Result = '" + this.m_HPV16Result + "',  "
+                        + "hpv.HPV16ResultCode = '" + this.m_HPV16ResultCode + "', "
+                        + "hpv.HPV18Result = '" + this.m_HPV18Result + "', "
+                        + "hpv.HPV18ResultCode = '" + this.m_HPV18ResultCode + "' "
+                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
             return sql;
         }
     }
