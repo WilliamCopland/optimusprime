@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-//using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
 
 namespace YellowstonePathology.OptimusPrime
@@ -26,7 +25,6 @@ namespace YellowstonePathology.OptimusPrime
             NGCTResult ngctResult = NGCTResult.GetResult(ngResult, ctResult);
             string sql = ngctResult.GetSqlStatement(aliquotOrderId);
 
-            //await MySqlHelper.ExecuteNonQueryAsync(connectionString, sql, null);
             using (var cnx = new SqlConnection(connectionString))
             {
                 using (var cmd = new SqlCommand(sql, cnx))

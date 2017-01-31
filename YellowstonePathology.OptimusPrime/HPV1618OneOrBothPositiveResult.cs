@@ -41,12 +41,6 @@ namespace YellowstonePathology.OptimusPrime
                         + "from tblPanelSetOrderHPV1618 hpv, tblPanelSetOrder pso "
                         + "where hpv.ReportNo = pso.ReportNo "
                         + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
-            /*string sql = @"Update tblPanelSetOrderHPV1618 hpv INNER JOIN tblPanelSetOrder pso ON hpv.ReportNo = pso.ReportNo " 
-                        + "set hpv.HPV16Result = '" + this.m_HPV16Result + "',  "
-                        + "hpv.HPV16ResultCode = '" + this.m_HPV16ResultCode + "', "
-                        + "hpv.HPV18Result = '" + this.m_HPV18Result + "', "
-                        + "hpv.HPV18ResultCode = '" + this.m_HPV18ResultCode + "' "
-                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";*/
 
             sql += @"Update tblPanelSetOrder set "
             + "Accepted = 1, "

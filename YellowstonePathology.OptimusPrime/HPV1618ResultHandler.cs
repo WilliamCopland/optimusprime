@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-//using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.OptimusPrime
 {
@@ -25,7 +24,7 @@ namespace YellowstonePathology.OptimusPrime
 
             HPV1618Result hpv1618Result = HPV1618Result.GetResult(hpv16Result, hpv18Result);
             string sql = hpv1618Result.GetSqlStatement(aliquotOrderId);
-            //await MySqlHelper.ExecuteNonQueryAsync(connectionString, sql, null);
+
             using (var cnx = new SqlConnection(connectionString))
             {
                 using (var cmd = new SqlCommand(sql, cnx))

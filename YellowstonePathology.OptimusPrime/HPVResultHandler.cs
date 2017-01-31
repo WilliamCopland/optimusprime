@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-//using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
 
 namespace YellowstonePathology.OptimusPrime
@@ -33,9 +32,6 @@ namespace YellowstonePathology.OptimusPrime
                         + "from tblHPVTestOrder psoh, tblPanelSetOrder pso "
                         + "where psoh.ReportNo = pso.ReportNo "
                         + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
-                    /*sql = @"Update tblHPVTestOrder psoh INNER JOIN tblPanelSetOrder pso ON psoh.ReportNo = pso.ReportNo "
-                        + "set psoh.Result = '" + hpvResult.Result + "' "
-                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";*/
 
                     sql += @"Update tblPanelSetOrder set ResultCode = '" + hpvResult.ResultCode + "', "                    
                     + "Accepted = 1, "
@@ -57,9 +53,6 @@ namespace YellowstonePathology.OptimusPrime
                         + "from tblHPVTestOrder psoh, tblPanelSetOrder pso "
                         + "where psoh.ReportNo = pso.ReportNo "
                         + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
-                    /*sql = @"Update tblHPVTestOrder psoh INNER JOIN tblPanelSetOrder pso ON psoh.ReportNo = pso.ReportNo "
-                        + "set psoh.Result = '" + hpvResult.Result + "' "
-                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";*/
 
                     sql += @"Update tblPanelSetOrder set ResultCode = '" + hpvResult.ResultCode + "', "                    
                     + "Accepted = 1, "
@@ -76,16 +69,12 @@ namespace YellowstonePathology.OptimusPrime
                         + "from tblHPVTestOrder psoh, tblPanelSetOrder pso "
                         + "where psoh.ReportNo = pso.ReportNo "
                         + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
-                    /*sql = @"Update tblHPVTestOrder psoh INNER JOIN tblPanelSetOrder pso ON psoh.ReportNo = pso.ReportNo "
-                        + "set psoh.Result = '" + hpvResult.Result + "' "
-                        + "where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";*/
 
                     sql += @"Update tblPanelSetOrder set ResultCode = '" + hpvResult.ResultCode + "' "                    
                     + "where PanelSetId = 14 and Accepted = 0 and OrderedOnId = '" + aliquotOrderId + "';";                    
                 }
             }
 
-            //await MySqlHelper.ExecuteNonQueryAsync(connectionString, sql, null);
             using (var cnx = new SqlConnection(connectionString))
             {
                 using (var cmd = new SqlCommand(sql, cnx))
