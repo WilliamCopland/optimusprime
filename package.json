@@ -19,6 +19,8 @@
     "electron-reload": "^1.1.0",
     "handlebars": "^4.0.6",
     "jquery": "^3.1.1",
-    "rsmq": "^0.7.2"
+    "json-rpc2": "^1.0.2",
+    "rsmq": "^0.7.2",
+    "winston": "^2.3.1"
   }
 }
