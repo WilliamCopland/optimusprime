@@ -1,0 +1,26 @@
+{
+  "productName": "Optimus Prime",
+  "name": "optimusprime",
+  "version": "0.0.1",
+  "main": "./main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package:osx": "electron-packager . --platform=darwin --arch=x64",
+    "package:win64": "electron-packager . --platform=win32 --arch=x64",
+    "package:win32": "electron-packager . --platform=win32 --arch=ia32",
+    "package:linux": "electron-packager . --platform=linux --arch=x64"
+  },
+  "devDependencies": {
+    "electron-packager": "^8.5.1",
+    "electron-prebuilt": "^1.4.13"
+  },
+  "dependencies": {
+    "electron-reload": "^1.1.0",
+    "handlebars": "^4.0.6",
+    "jquery": "^3.1.1",
+    "json-rpc2": "^1.0.2",
+    "rsmq": "^0.7.2",
+    "winston": "^2.3.1"
+  }
+}
