@@ -20,6 +20,7 @@
     "handlebars": "^4.0.6",
     "jquery": "^3.1.1",
     "json-rpc2": "^1.0.2",
+    "level": "^1.6.0",
     "rsmq": "^0.7.2",
     "winston": "^2.3.1"
   }
