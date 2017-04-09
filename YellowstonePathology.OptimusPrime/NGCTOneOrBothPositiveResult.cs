@@ -34,21 +34,21 @@ namespace YellowstonePathology.OptimusPrime
 
         public override string GetSqlStatement(string aliquotOrderId)
         {
-            string sql = @"Update tblNGCTTestOrder set NeisseriaGonorrhoeaeResult = '" + this.m_NGResult + "',  "
-                        + "NGResultCode = '" + this.m_NGResultCode + "', "
-                        + "ChlamydiaTrachomatisResult = '" + this.m_CTResult + "', "
-                        + "CTResultCode = '" + this.m_CTResultCode + "' "
-                        + "from tblNGCTTestOrder ngct, tblPanelSetOrder pso "
-                        + "where ngct.ReportNo = pso.ReportNo "
-                        + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
+            string sql = @"Update tblNGCTTestOrder ngct "
+                + "Inner Join tblPanelSetOrder pso on ngct.ReportNo = pso.ReportNo "
+                + "set NeisseriaGonorrhoeaeResult = '" + this.m_NGResult + "',  "
+                + "NGResultCode = '" + this.m_NGResultCode + "', "
+                + "ChlamydiaTrachomatisResult = '" + this.m_CTResult + "', "
+                + "CTResultCode = '" + this.m_CTResultCode + "' "                
+                + "Where pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
 
             sql += @"Update tblPanelSetOrder set "
-            + "Accepted = 1, "
-            + "AcceptedBy = 'AUTOVER TESTING', "
-            + "AcceptedById = 5134, "
-            + "AcceptedDate = '" + DateTime.Today.ToString("yyyy-MM-dd") + "', "
-            + "AcceptedTime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "' "            
-            + "where PanelSetId = 3 and Accepted = 0 and OrderedOnId = '" + aliquotOrderId + "';";
+                + "Accepted = 1, "
+                + "AcceptedBy = 'AUTOVER TESTING', "
+                + "AcceptedById = 5134, "
+                + "AcceptedDate = '" + DateTime.Today.ToString("yyyy-MM-dd") + "', "
+                + "AcceptedTime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "' "            
+                + "where PanelSetId = 3 and Accepted = 0 and OrderedOnId = '" + aliquotOrderId + "';";
 
             return sql;
         }

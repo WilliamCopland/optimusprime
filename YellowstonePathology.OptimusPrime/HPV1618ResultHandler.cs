@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace YellowstonePathology.OptimusPrime
 {
@@ -14,8 +14,8 @@ namespace YellowstonePathology.OptimusPrime
         }
 
         public async Task<string> HandleResult(IDictionary<string, object> payload)
-        {
-            var connectionString = "Data Source=TestSQL;Initial Catalog=YPIData;Integrated Security=True";
+        {            
+            var connectionString = "Server = 10.1.2.26; Uid = sqldude; Pwd = 123Whatsup; Database = lis;";
 
             string testName = (string)payload["testName"];
             string aliquotOrderId = (string)payload["aliquotOrderId"];
@@ -25,9 +25,9 @@ namespace YellowstonePathology.OptimusPrime
             HPV1618Result hpv1618Result = HPV1618Result.GetResult(hpv16Result, hpv18Result);
             string sql = hpv1618Result.GetSqlStatement(aliquotOrderId);
 
-            using (var cnx = new SqlConnection(connectionString))
+            using (var cnx = new MySqlConnection(connectionString))
             {
-                using (var cmd = new SqlCommand(sql, cnx))
+                using (var cmd = new MySqlCommand(sql, cnx))
                 {
                     await cnx.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
