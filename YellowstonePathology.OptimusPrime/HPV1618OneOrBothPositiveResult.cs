@@ -19,8 +19,8 @@ namespace YellowstonePathology.OptimusPrime
                 this.m_HPV16Result = "Negative";
                 this.m_HPV16ResultCode = "HPV1618G16NGTV";
             }
-
-            if(pantherHPV18Result == HPV1618Result.PantherHPV1845PositiveResult)
+            
+            if (pantherHPV18Result == HPV1618Result.PantherHPV1845PositiveResult)
             {
                 this.m_HPV18Result = "Positive";
                 this.m_HPV18ResultCode = "HPV1618G18PSTV";
@@ -33,12 +33,13 @@ namespace YellowstonePathology.OptimusPrime
         }
 
         public override string GetSqlStatement(string aliquotOrderId)
-        {
-            string sql = @"Update tblPanelSetOrderHPV1618 set HPV16Result = '" + this.m_HPV16Result + "',  "
-                        + "HPV16ResultCode = '" + this.m_HPV16ResultCode + "', "
+        {            
+            string sql = @"Update tblPanelSetOrderHPV1618 hpv "
+                        + "Inner Join tblPanelSetOrder pso on hpv.ReportNo = pso.ReportNo "                        
+                        + "set HPV16ResultCode = '" + this.m_HPV16ResultCode + "', "
+                        + "HPV16Result = '" + this.m_HPV16Result + "', "
                         + "HPV18Result = '" + this.m_HPV18Result + "', "
-                        + "HPV18ResultCode = '" + this.m_HPV18ResultCode + "' "
-                        + "from tblPanelSetOrderHPV1618 hpv, tblPanelSetOrder pso "
+                        + "HPV18ResultCode = '" + this.m_HPV18ResultCode + "' "                        
                         + "where hpv.ReportNo = pso.ReportNo "
                         + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
 

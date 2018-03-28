@@ -51,13 +51,14 @@ namespace YellowstonePathology.OptimusPrime
                 else if (result == "TRICH POS")
                 {
                     hpvResult = new TrichomonasPositiveResult();
-                    sql = @"Update tblTrichomonasTestOrder set Result = '" + hpvResult.Result + "' "
-                        + "from tblTrichomonasTestOrder psoh, tblPanelSetOrder pso "
+                    sql = @"Update tblTrichomonasTestOrder psoh "
+                        + "inner join tblPanelSetOrder pso on psoh.ReportNo = pso.ReportNo "
+                        + "set Result = '" + hpvResult.Result + "' "                        
                         + "where psoh.ReportNo = pso.ReportNo "
                         + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
 
                     sql += @"Update tblPanelSetOrder set ResultCode = '" + hpvResult.ResultCode + "', "
-                    + "HoldDistribution = 1, "
+                    + "HoldDistribution = 0, "
                     + "Accepted = 1, "
                     + "AcceptedBy = 'AUTOVER TESTING', "
                     + "AcceptedById = 5134, "
@@ -68,13 +69,14 @@ namespace YellowstonePathology.OptimusPrime
                 else if (result == "Invalid")
                 {
                     hpvResult = new TrichomonasInvalidResult();
-                    sql = @"Update tblTrichomonasTestOrder set Result = '" + hpvResult.Result + "' "
-                        + "from tblTrichomonasTestOrder psoh, tblPanelSetOrder pso "
+                    sql = @"Update tblTrichomonasTestOrder psoh "
+                        + "inner join tblPanelSetOrder pso on psoh.ReportNo = pso.ReportNo "
+                        + "set Result = '" + hpvResult.Result + "' "                        
                         + "where psoh.ReportNo = pso.ReportNo "
                         + "and pso.OrderedOnId = '" + aliquotOrderId + "' and pso.Accepted = 0; ";
 
                     sql += @"Update tblPanelSetOrder set ResultCode = '" + hpvResult.ResultCode + "', "
-                    + "HoldDistribution = 1 "                    
+                    + "HoldDistribution = 0 "                    
                     + "where PanelSetId = 61 and Accepted = 0 and OrderedOnId = '" + aliquotOrderId + "';";                    
                 }
             }

@@ -83,21 +83,8 @@ namespace YellowstonePathology.OptimusPrime
                     await cmd.ExecuteNonQueryAsync();
                 }
             }
-
-            return sql;
-            //return "Optimus Prime updated result: " + aliquotOrderId + " - " + testName + " on: " + DateTime.Now.ToString();
+            
+            return "Optimus Prime updated result: " + aliquotOrderId + " - " + testName + " on: " + DateTime.Now.ToString();
         }
     }
 }
-
-
-/*
-Update 
-	tblHPVTestOrder as psoh
-    inner join tblPanelSetOrder as pso 
-		on psoh.ReportNo = pso.ReportNo
-Set 
-	Result = 'Negative' 
-Where 
-	pso.OrderedOnId = '17-8934.1.2' and pso.Accepted = 0; 
- */

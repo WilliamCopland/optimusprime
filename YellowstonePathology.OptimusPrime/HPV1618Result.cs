@@ -62,7 +62,7 @@ namespace YellowstonePathology.OptimusPrime
         public string HPV18Result
         {
             get { return this.m_HPV18Result; }
-        }       
+        }        
 
         public virtual string GetSqlStatement(string aliquotOrderId)
         {
